@@ -1,5 +1,5 @@
 ﻿
-|objProducto1 objProducto2 objProducto3 objProducto4 objProducto5  productos|
+|objProducto1 objProducto2 objProducto3 objProducto4 objProducto5 objProducto6 objProducto7 objProducto8 objProducto9 productos|
 |categoria categorias productosPorCategoria productosPorCategoriaDistinta objSupermercado productosOrdenados mensaje ingresoCategoria|
 
 
@@ -21,46 +21,42 @@ objSupermercado agregarProducto: objProducto4.
 objSupermercado agregarProducto: objProducto5.
 objSupermercado agregarProducto: objProducto6.
 objSupermercado agregarProducto: objProducto7.
-"
-productos := objSupermercado consultarProductosPorCategoria: 'ALIMENTOS'.
-productos inspect."
+
 
 productos := objSupermercado verProductos.
+productos inspect.
+
+"************ORDENAMIENTO DE OBJETOS POR ID DE PRODUCTO A TRAVES DE METODO DE SUPEMERCADO QUE UTILIZA (SORTEDCOLLECTION)***************"
+productosOrdenados := objSupermercado ordenarProductosPorID.
 
 
-"************ORDENAMIENTO DE OBJETOS POR ID DE PRODUCTO CON ALGORITMO DE ORDENAMIENTO POR INTERCAMBIO***************"
-productosOrdenados :=  productos asSortedCollection: [ :a :b | a verCodigo > b verCodigo].
-productosOrdenados inspect.
+"*************************************************CONSULTA TODAS LAS CATEGORIAS DISPONIBLES (COLLECT)*************************************************************"
+categorias := objSupermercado consultarTodasLasCategoriasProductos.
 
-
-"*************************USO DEL COLLECT PARA OBTENER LAS CATEGORIAS DE LOS PRODUCTOS DISPONIBLES*********************************"
-categorias := productos collect: [:cat | cat verCategoria].
-
-
-"*********************************************CONSULTA DE PRODUCTOS POR CATEGORIA************************************************************"
+"*********************************************CONSULTA DE PRODUCTOS POR CATEGORIA (SELECT)************************************************************************"
 ingresoCategoria := Prompter prompt: 'INGRESE LA CATEGORIA PARA CONSULTAR:'.
 
 (categorias includes: ingresoCategoria)ifTrue: [
 	mensaje := MessageBox notify: 'CONSULTA EXITOSA' caption: 'EXITO CONSULTA'.
-	productosPorCategoria := supermercado consultarProductosPorCategoria: productos categoria: ingresoCategoria.
+	productosPorCategoria := objSupermercado consultarProductosPorCategoria: ingresoCategoria.	
 ]
 ifFalse: [
 	mensaje :=    MessageBox notify: 'ERROR NO HAY PRODUCTOS CON ESA CATEGORIA' caption: 'ERROR CONSULTA'.
 ].
 
 
-"***********************************CONSULTAR PRODUCTOS POR CATEGORIA MENOS LA INDICADA***********************************************"
+"***********************************CONSULTAR PRODUCTOS POR CATEGORIA MENOS LA INDICADA (REJECT)************************************************************"
 ingresoCategoria := Prompter prompt: 'CONSULTAR TODOS LOS PRODUCTOS MENOS LA CATEGORIA:'.
 
 (categorias includes: ingresoCategoria)ifTrue: [
 	mensaje := MessageBox notify: 'CONSULTA EXITOSA' caption: 'EXITO CONSULTA'.
-	productosPorCategoriaDistinta  := supermercado consultarProductosPorCategoriaDistinta: productos categoria: ingresoCategoria.
+	productosPorCategoriaDistinta  := objSupermercado consultarProductosPorCategoriaDistinta: ingresoCategoria.
 ]
 ifFalse: [
 	mensaje := MessageBox notify: 'ERROR NO HAY PRODUCTOS CON ESA CATEGORIA' caption: 'ERROR CONSULTA'.
 ].
 
-"*************************************************************************************************************************************************************"
+"*************************************************************************************************************************************************************************************"
 
 productos inspect.
 productosOrdenados inspect.
@@ -68,10 +64,13 @@ productosPorCategoria inspect.
 productosPorCategoriaDistinta inspect.
 
 
+"************************************************************************OTRAS CONSULTAS***************************************************************************************"
 
+objProducto8 := objSupermercado buscarProductoPorCodigo: 1.
+objProducto8 inspect.
 
-
-
-
+"UTILIZACION DE METODO QUE  CONTIENE (DETECT)"
+objProducto9 := objSupermercado buscarProductoPorNombre: 'FIDEOS'.
+objProducto9 inspect.
 
 

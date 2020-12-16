@@ -11,6 +11,7 @@ misuper agregarProducto: prod1.
 misuper agregarProducto: prod2.
 misuper agregarProducto: prod3.
 
+
 "*********************************************************ELIMINACION DE PRODUCTO POR NOMBRE*****************************************************************"
 
 eliminarProducto := MessageBox confirm: 'DESEA ELIMINAR UN PRODUCTO?' caption: 'ELMINACION DE PRODUCTOS'.
@@ -50,10 +51,10 @@ ifTrue: [
 
 		misuper modificarProducto: cod nombre: nom categoria: cat precio: prec stock: cant.
 		
-		modificarProducto := MessageBox confirm: 'DESEA ELIMINAR MAS PRODUCTOS?' caption: 'ELIMINACION DE PRODUCTOS'.
+		modificarProducto := MessageBox confirm: 'DESEA MODIFICAR MAS PRODUCTOS?' caption: 'MODIFICACION DE PRODUCTOS'.
         ].
 	
-        MessageBox notify: 'LA MODIFICACION HA FINALIZADO' caption: 'FINALIZACION DE ELIMINACION'.
+        MessageBox notify: 'LA MODIFICACION HA FINALIZADO' caption: 'FINALIZACION DE MODIFICACION'.
 ]
 ifFalse: [ 
 	MessageBox notify: 'NO SE HA MODIFICADO NINGUN PRODUCTO' caption:'Finalizado'.
